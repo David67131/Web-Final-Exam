@@ -9,13 +9,15 @@ export default function EmployeePage(props) {
   return (
     <>
       <Head>
-        <title></title>
+        <title>Employees</title>
       </Head>
       <h1>{employee.first_name}</h1>
       <div>
         <p>${employee.gender}</p>
         <p>${employee.phone}</p>
-      
+        <p>${employee.job_title}</p>
+        <p>${employee.salary}</p>
+        <p>${employee.last_name}</p>
       </div>
       <Link href="/employee">Back to Employee List</Link>
     </>
