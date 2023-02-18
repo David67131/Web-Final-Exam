@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
 
 const articleSchema = new Schema({
-    code: Number,
+    code: String,
     name: String,
     price: Number,
 });
