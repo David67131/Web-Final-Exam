@@ -29,7 +29,7 @@ export default function Product({ product }) {
 // STEP 1: This function will be executed at the server before loading the page.
 export async function getServerSideProps({ params }) {
   console.debug('params', params)
-  const res = await fetch(`http://localhost:3000/api/stock/products/${params.id}`)
+  const res = await fetch(`https://stock-next-lemon.vercel.app/api/stock/products/${params.id}`)
   const product = await res.json()
   console.debug('product 1', product)
   return { props: { product } }
