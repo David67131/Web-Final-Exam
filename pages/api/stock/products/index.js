@@ -1,6 +1,6 @@
-import {connect, model, models, Schema} from "mongoose"
-const connectionString = 'mongodb+srv://user1:XwEofAuPYqSqIvZJ@cluster0.39ayzg6.mongodb.net/stock'
-
+import { connect, model, models, Schema } from "mongoose"
+//const connectionString = 'mongodb+srv://user1:XwEofAuPYqSqIvZJ@cluster0.39ayzg6.mongodb.net/stock'
+const connectionString = process.env.MONGODB_URI
 
 export default async function handler(req, res) {
     await connect(connectionString);
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         const docs = await Article.find()
         res.status(200).json(docs)
     } else if (req.method === 'POST') {
-        console.log(req.body)
+        console.log(typeof(req.body))
         // res.status(200).json(req.body)
         const doc = await Article.create(req.body)
         res.status(201).json(doc)

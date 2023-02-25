@@ -1,18 +1,21 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-export default function Home(props) {
-  const { products } = props;
+export default function Home({ products }) {
 
-  if (!products) return (<div>Loading...</div>)
+  function deleteProduct(id) {
+    fetch(`http://localhost:3000/api/stock/products/${id}`,
+      {
+        method: 'DELETE'
+      })
+      .then(res => res.json())
+      .then(data => {
+        // alert("Deleting " + id)
+        window.location.reload(false);
+      })
 
-  const list = products.map((product) => (
-    <li key={product.id}>
-      <Link href={`/product/${product.id}`}>
-        {product.title}
-      </Link>
-    </li>
-  ))
+  }
 
   return (
     <>
@@ -20,24 +23,34 @@ export default function Home(props) {
         <title>Products</title>
       </Head>
       <h1>Products</h1>
-      <div>
-        <ul>
-          {list}
-        </ul>
-      </div>
+      <table><tbody>
+        {
+          products.map(product => {
+            return (
+              <tr key={product._id}>
+                <td>
+                  <Link href={`/products/${product._id}`}>
+                    {product.title}
+                  </Link>
+                </td>
+                <td>
+                  <button onClick={() => deleteProduct(product._id)}>Delete</button>
+                </td>
+              </tr>
+            )
+          })
+        }
+      </tbody>
+      </table>
+      <p>
+      </p>
+
     </>
   )
 }
-
 export async function getServerSideProps() {
-  // products.json is in /public
-  console.debug(`Fetching ${process.env.APIURL}product`)
-  const ret = await fetch(`${process.env.APIURL}product`)
-  const products = await ret.json()
-  console.log({ products })
-  return {
-    props: {
-      products
-    }
-  }
+  const res = await fetch(`http://localhost:3000/api/stock/products/`)
+  const products = await res.json()
+  // console.debug('product 1', products)
+  return { props: { products } }
 }
