@@ -29,8 +29,8 @@ export default function Home({ products }) {
             return (
               <tr key={product._id}>
                 <td>
-                  <Link href={`/products/${product._id}`}>
-                    {product.title}
+                  <Link href={`/product/${product._id}`}>
+                    {product.name}
                   </Link>
                 </td>
                 <td>

@@ -7,7 +7,7 @@ export default function Product({ product }) {
   if (!product) return (
     <div>
       <p>Product not found</p>
-      <Link href="/products">Back</Link>
+      <Link href="/product">Back</Link>
       </div>
   );
 
@@ -16,9 +16,9 @@ export default function Product({ product }) {
       <Head>
         <title>Products</title>
       </Head>
-      <h1>{product.title}</h1>
+      <h1>{product.code}</h1>
       <div>
-        <p>${product.description}</p>
+        <p>${product.name}</p>
         <p>${product.price}</p>
       </div>
       <Link href="/product">Back to Product List</Link>
