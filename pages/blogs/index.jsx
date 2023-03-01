@@ -36,7 +36,10 @@ export default function Home({ blogs }) {
                     {blog.title}
                   </Link>
                 </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>
+                  <Link href={`/blogs/update/${blog._id}`}>Update</Link>
+                  &nbsp;&nbsp;&nbsp;
                   <button onClick={() => deleteBlog(blog._id)}>Delete</button>
                 </td>
               </tr>

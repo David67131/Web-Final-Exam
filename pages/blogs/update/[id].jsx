@@ -1,3 +1,7 @@
+/*
+Update page
+It populates the blog data into the form.
+*/
 import Head from "next/head"
 import Link from "next/link"
 
@@ -12,9 +16,9 @@ export default function Blog({ blog }) {
   const [data, setData] = useState("");
 
 
-  const saveBlog = async (data) => {
-    const response = await fetch('/api/blogs/articles', {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+  const updateBlog = async (data) => {
+    const response = await fetch(`/api/blogs/articles/${blog._id}`, {
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       // credentials: "same-origin", // include, *same-origin, omit
@@ -31,7 +35,7 @@ export default function Blog({ blog }) {
     if (result.error) {
       alert("Error: " + result.error)
     } else {
-      alert("Blog saved")
+      alert("Blog updated")
       window.location.href = "/blogs"
     }
     console.log(result)
@@ -53,7 +57,7 @@ export default function Blog({ blog }) {
       </Head>
 
       <div style={{ margin: '1rem' }}>
-        <form onSubmit={handleSubmit(saveBlog)}>
+        <form onSubmit={handleSubmit(updateBlog)}>
           <h1>Update Blog</h1>
           <label htmlFor="title">Title</label><br />
           <input id="title" {...register("title", { required: true })} 
@@ -75,8 +79,6 @@ export default function Blog({ blog }) {
         </form>
       </div>
 
-      <p>{blog.title}</p>
-      <p>{blog.content}</p>
       <Link href="/blogs">Back</Link>
     </>
   )
