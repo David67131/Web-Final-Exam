@@ -1,0 +1,4 @@
+const database = 'stock';const collection = 'products';use(database);db.articles.insert({    "code": "3",
+  "name": "iphone 6",
+  "price": 20000
+  })
