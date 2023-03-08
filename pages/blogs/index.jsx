@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Home({ blogs }) {
+
+  const { data: session } = useSession()
 
   function deleteBlog(id) {
     fetch(`/api/blogs/articles/${id}`,
@@ -26,28 +29,42 @@ export default function Home({ blogs }) {
       <p style={{ margin: '0.4rem' }}>
         <Link href="/blogs/add">+New Blog</Link>
       </p>
-      <table><tbody>
-        {
-          blogs.map(blog => {
-            return (
-              <tr key={blog._id}>
-                <td>
-                  <Link href={`/blogs/${blog._id}`}>
-                    {blog.title}
-                  </Link>
-                </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>
-                  <Link href={`/blogs/update/${blog._id}`}>Update</Link>
-                  &nbsp;&nbsp;&nbsp;
-                  <button onClick={() => deleteBlog(blog._id)}>Delete</button>
-                </td>
-              </tr>
-            )
-          })
-        }
-      </tbody>
+      <table>
+        <thead>
+          <tr>
+            <th style={{width: '20rem'}}>Title</th>
+            <th style={{width: '10rem'}}>Category</th>
+            <th style={{width: '10rem'}}>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            blogs.map(blog => {
+              return (
+                <tr key={blog._id}>
+                  <td>
+                    <Link href={`/blogs/${blog._id}`}>
+                      {blog.title}
+                    </Link>
+                  </td>
+                  <td style={{textAlign:'center'}}>{blog.category}</td>
+                  <td>
+                    {session &&
+                      <>
+                        <Link href={`/blogs/update/${blog._id}`}>Update</Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <button onClick={() => deleteBlog(blog._id)}>Delete</button>
+                      </>
+                }
+                  </td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
       </table>
+      <hr/>
+      <Link href="/">Home</Link>
       <p>
       </p>
 
