@@ -8,4 +8,4 @@ This project can display and edit supplier information (such as adding a supplie
 
 ![image](https://github.com/David67131/Web-Final-Exam/blob/main/Sample%20image%201.png)  
 
-![image](https://github.com/David67131/Web-Final-Exam/blob/main/Sample-image-2.png)  
+![image](https://github.com/David67131/Web-Final-Exam/blob/main/Sample%20image%202.png)  
