@@ -25,7 +25,7 @@ export default function AddBlogPage() {
             alert("Error: " + result.error)
         } else {
             alert("Blog saved")
-            window.location.href = "/blogs"
+            window.location.href = "/suppliers"
         }
         console.log(result)
         setData(JSON.stringify(data))
@@ -34,18 +34,16 @@ export default function AddBlogPage() {
     return (
         <div style={{ margin: '1rem' }}>
             <form onSubmit={handleSubmit(saveBlog)}>
-                <h1>New Blog</h1>
-                <label htmlFor="title">Title</label><br />
-                <input id="title" {...register("title", { required: true })} placeholder="Blog Title" /><br />
+                <h1>New Supplier</h1>
+                <label htmlFor="title">Supplier Name</label><br />
+                <input id="title" {...register("title", { required: true })} placeholder="Please enter supplier name" /><br />
 
-                <label htmlFor="category">Category</label>
-                <select id="category" {...register("category", { required: true })}>
-                    <option value="">Select...</option>
-                    <option value="news">News</option>
-                    <option value="life">Life</option>
-                </select><br />
-                <label htmlFor="content">Category</label><br />
-                <textarea id="text" {...register("content")} placeholder="About you" /><br />
+                
+                <label htmlFor="title">Address</label><br />
+                <input id="title" {...register("title", { required: true })} placeholder="Please enter address " /><br />
+                
+                <label htmlFor="title">Phone Number</label><br />
+                <input id="title" {...register("title", { required: true })} placeholder="Please enter phone number" /><br />
                 <input type="submit" />
                 <p>{data}</p><br />
             </form>
